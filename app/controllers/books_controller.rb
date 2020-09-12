@@ -39,6 +39,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def destroy
+    @book = Book.find(params[:id])
+    authors = @book.authors
+    if @book.destroy
+      render json: { status: "SUCCESS", message: "Book is deleted", data: [book: @book, authors: authors] }
+    else
+      render json: { status: "ERROR", message: "Book is not deleted", errors: [book: @book.errors.messages] }
+    end
+  end
+
   private
 
   def book_params
