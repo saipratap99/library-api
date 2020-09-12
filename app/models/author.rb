@@ -4,12 +4,13 @@ class Author < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def self.authors_exists?(authors)
+    ids_not_exists = []
     authors.each do |author|
       unless (Author.where(id: author).exists?)
-        #render json: { status: "ERROR", message: "Couldn't find Author with id #{author}" }, status: :unprocessable_entity
-        return false, author
+        ids_not_exists << author
       end
     end
-    return true, nil
+    msg = "Couldn't find Author with #{"id".pluralize(ids)}. #{ids_not_exists.join(",")}"
+    return ids_not_exists.empty? ? [true, msg] : [false, nil]
   end
 end
