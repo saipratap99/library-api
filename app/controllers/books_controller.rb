@@ -1,4 +1,9 @@
 class BooksController < ApplicationController
+  def show
+    @book = Book.find(params[:id])
+    render json: { status: "SUCCESS", message: "Book is fetched", data: [book: @book, authors: @book.authors] }
+  end
+
   def create
     @book = Book.new(book_params)
     authors = params[:authors]
