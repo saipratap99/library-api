@@ -11,6 +11,6 @@ class Author < ApplicationRecord
       end
     end
     msg = "Couldn't find Author with #{"id".pluralize(ids)}. #{ids_not_exists.join(",")}"
-    return ids_not_exists.empty? ? [true, msg] : [false, nil]
+    return ids_not_exists.empty? ? [false, nil] : [true, msg]
   end
 end

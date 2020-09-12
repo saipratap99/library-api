@@ -20,9 +20,28 @@ class BooksController < ApplicationController
     end
   end
 
+  def update
+    @book = Book.find(params[:id])
+    authors = params[:authors]
+
+    if !(authors.nil? || authors.empty?)
+      authors = authors.split(",")
+      authors_not_found, msg = Author.authors_exists? authors
+    end
+
+    if authors_not_found
+      render json: { status: "ERROR", message: msg }
+    elsif @book.update_attributes (book_params)
+      @book.add_authors_to_book authors if !(authors.nil? || authors.empty?)
+      render json: { status: "SUCCESS", message: "Book is updated", data: [book: @book, authors: @book.authors] }
+    else
+      render json: { status: "ERROR", message: "Book is not updated", errors: [book: @book.errors.messages] }
+    end
+  end
+
   private
 
   def book_params
-    params.require(:book).permit(:name, :edition, :publication_year)
+    params.require(:book).permit(:name, :edition, :publication_year, :authors)
   end
 end
