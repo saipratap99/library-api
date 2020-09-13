@@ -1,5 +1,10 @@
 module V1
   class BooksController < ApplicationController
+    def index
+      @books = Book.page(page).per(per_page)
+      render json: { books: @books, meta: { pagination: { per_page: per_page, total_pages: page_count, current_page: page } } }
+    end
+
     def show
       @book = Book.find(params[:id])
       render json: { status: "SUCCESS", message: "Book is fetched", data: [book: @book, authors: @book.authors] }
@@ -59,6 +64,19 @@ module V1
 
     def book_params
       params.require(:book).permit(:name, :edition, :publication_year, :authors)
+    end
+
+    def page
+      @page ||= params[:page] || 1
+    end
+
+    def per_page
+      @per_page ||= params[:per_page] || 2
+    end
+
+    def page_count
+      count = Book.count / per_page.to_f
+      count.ceil
     end
   end
 end

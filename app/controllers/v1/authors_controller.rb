@@ -17,7 +17,7 @@ module V1
 
     def page_count
       count = Author.count / per_page.to_f
-      count.ceil()
+      count.ceil
     end
   end
 end
