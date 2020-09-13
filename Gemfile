@@ -28,6 +28,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "rspec-rails"
+  gem "rswag-specs"
 end
 
 group :development do
@@ -45,3 +47,7 @@ gem "pagy", "~> 3.8"
 gem "pager_api", "~> 0.3.2"
 
 gem "kaminari", "~> 1.2"
+
+gem 'rswag-api'
+
+gem 'rswag-ui'
