@@ -2,7 +2,7 @@ module V1
   class BooksController < ApplicationController
     def index
       @books = Book.page(page).per(per_page)
-      render json: { books: @books, meta: { pagination: { per_page: per_page, total_pages: page_count, current_page: page } } }
+      render json: { books: @books, meta: { pagination: { per_page: per_page, total_pages: page_count, books: Book.count, current_page: page } } }
     end
 
     def show
@@ -71,7 +71,7 @@ module V1
     end
 
     def per_page
-      @per_page ||= params[:per_page] || 2
+      @per_page ||= params[:per_page] || 10
     end
 
     def page_count
