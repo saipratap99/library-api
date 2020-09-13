@@ -8,7 +8,6 @@ module V1
     private
 
     def page
-      puts "**********#{params[:page]}*************"
       @page ||= params[:page] || 1
     end
 

@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :edition, :publication_year, presence: true
 
   def add_authors_to_book(authors)
