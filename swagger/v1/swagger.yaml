@@ -33,6 +33,15 @@ paths:
               - edition
               - publication_year
               - authors
+    get:
+      summary: Retrives Books
+      tags:
+      - Books
+      parameters: []
+      responses:
+        '200':
+          description: Books retrived
+          content: {}
 servers:
 - url: http://{defaultHost}
   variables:

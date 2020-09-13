@@ -20,4 +20,21 @@ RSpec.describe "/v1/books", type: :request do
         end
     end
     end
+    path "/v1/books" do
+        get "Retrives Books" do
+          tags "Books"
+          parameter name: :book, in: :body, schema: {
+          type: :object,
+          properties: {
+            page: { type: :integer },
+            per_page: { type: :integer },
+          },
+          required: ["page","per_page"],
+          }
+          response "200", "Books retrived" do
+            let(:encounter){{page: 1,per_page: 5}}
+            run_test!
+          end
+        end
+    end
 end
