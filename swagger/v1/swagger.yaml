@@ -1,0 +1,40 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/books":
+    post:
+      summary: Create a Book
+      tags:
+      - Books
+      parameters: []
+      responses:
+        '200':
+          description: Book created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                edition:
+                  type: integer
+                publication_year:
+                  type: string
+                authors:
+                  type: string
+              required:
+              - name
+              - edition
+              - publication_year
+              - authors
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
