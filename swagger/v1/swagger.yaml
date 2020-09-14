@@ -37,7 +37,15 @@ paths:
       summary: Retrives Books
       tags:
       - Books
-      parameters: []
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        schema:
+          type: integer
       responses:
         '200':
           description: Books retrived
