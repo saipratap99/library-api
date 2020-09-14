@@ -45,6 +45,28 @@ RSpec.describe "/v1/books", type: :request do
       end
   end
   path "/v1/books/{id}" do
+    patch "Updates a Book" do
+      tags "Books"
+      consumes "application/json"
+      parameter name: :id, in: :path, type: :integer
+      parameter name: :book, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string },
+          edition: { type: :integer },
+          publication_year: { type: :string },
+          authors: { type: :string },
+        }
+      }
+      response "200", "Book is updated" do
+        let(:id) {1}
+        let(:book) { { name: "R Programming", edition: 2,publication_year: "1991", authors: "8,25" } }
+        run_test!
+      end
+  end
+  end
+
+  path "/v1/books/{id}" do
     delete "deletes a Book" do
       tags "Books"
       produces "application/json"
