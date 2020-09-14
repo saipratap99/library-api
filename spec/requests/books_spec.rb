@@ -39,9 +39,20 @@ RSpec.describe "/v1/books", type: :request do
         produces "application/json"
         parameter name: :id, in: :path,type: :integer
         response "200", "Book retrived" do
-          let(:book){1}
+          let(:id){2}
           run_test!
         end
       end
   end
+  path "/v1/books/{id}" do
+    delete "deletes a Book" do
+      tags "Books"
+      produces "application/json"
+      parameter name: :id, in: :path,type: :integer
+      response "200", "Book deleted" do
+        let(:id){2}
+        run_test!
+      end
+    end
+end
 end

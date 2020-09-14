@@ -65,6 +65,20 @@ paths:
         '200':
           description: Book retrived
           content: {}
+    delete:
+      summary: deletes a Book
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Book deleted
+          content: {}
 servers:
 - url: http://{defaultHost}
   variables:
