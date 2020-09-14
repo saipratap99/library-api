@@ -33,4 +33,15 @@ RSpec.describe "/v1/books", type: :request do
           end
         end
     end
+    path "/v1/books/{id}" do
+      get "Retrives a Book" do
+        tags "Books"
+        produces "application/json"
+        parameter name: :id, in: :path,type: :integer
+        response "200", "Book retrived" do
+          let(:book){1}
+          run_test!
+        end
+      end
+  end
 end

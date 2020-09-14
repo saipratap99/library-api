@@ -50,6 +50,21 @@ paths:
         '200':
           description: Books retrived
           content: {}
+  "/v1/books/{id}":
+    get:
+      summary: Retrives a Book
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Book retrived
+          content: {}
 servers:
 - url: http://{defaultHost}
   variables:
