@@ -4,6 +4,24 @@ info:
   title: API V1
   version: v1
 paths:
+  "/v1/authors":
+    get:
+      summary: Retrives Authors
+      tags:
+      - Authors
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Authors retrived
+          content: {}
   "/v1/books":
     post:
       summary: Create a Book
